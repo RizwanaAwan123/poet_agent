@@ -5,12 +5,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# --- Tool ---
+
 @function_tool
 def poetic_mood():
     return "Silence and light"
 
-# --- Base Agents ---
+
 
 poet_agent = Agent(
     name="Poet Agent",
@@ -42,7 +42,7 @@ dramatic_analyst_agent = Agent(
     """
 )
 
-# --- Parent Agent (like Plant/Medicine one) ---
+# --- Parent Agent  ---
 
 parent_agent = Agent(
     name="Parent Poet Agent",
@@ -62,7 +62,7 @@ parent_agent = Agent(
     tools=[poetic_mood]
 )
 
-# --- Main Function ---
+
 
 async def main():
     with trace("Poet Flow "):
@@ -82,7 +82,6 @@ async def main():
         print("✅ Final Output:\n", result.final_output)
         print("🔍 Last Agent:", result.last_agent.name)
 
-# --- Run ---
 
 if __name__ == "__main__":
     asyncio.run(main())
