@@ -47,17 +47,22 @@ dramatic_analyst_agent = Agent(
 parent_agent = Agent(
     name="Parent Poet Agent",
     instructions="""
-        Your job is to handle poetry queries.
-        First, send any input to the Poet Agent.
 
-        Then:
-        - If poem has words like 'curtain', 'actor', 'perform', delegate to Dramatic Analyst Agent.
-        - If it has 'journey', 'conflict', 'hero', 'memory', delegate to Narrative Analyst Agent.
-        - Otherwise, send to Lyric Analyst Agent by default.
+    Your job is to handle poetry queries.
+    First, send any input to the Poet Agent.
 
-        Do not answer non-poetry queries yourself.
-        Use poetic_mood tool if needed.
-    """,
+    Then:
+    - Convert the poem to lowercase and strip punctuation.
+    - If poem contains 'curtain', 'actor', 'perform', 'stage', 'audience', 'scene',
+      delegate to Dramatic Analyst Agent.
+    - If it contains 'journey', 'conflict', 'hero', or 'memory',
+      delegate to Narrative Analyst Agent.
+    - Otherwise, delegate to Lyric Analyst Agent.
+
+    Do not answer non-poetry queries yourself.
+    Use poetic_mood tool if needed.
+    """ ,
+
     handoffs=[poet_agent, lyric_analyst_agent, narrative_analyst_agent, dramatic_analyst_agent],
     tools=[poetic_mood]
 )
